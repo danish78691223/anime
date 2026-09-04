@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+/* ==============================
+   TOKENS
+================================ */
+
+:root {
+  --ink: #0d0d0d;
+  --paper: #f2ecdc;
+  --paper-dim: #e7dfc9;
+  --red: #d92b2b;
+  --red-dark: #a11c1c;
+  --gold: #c9a227;
+  --line: #1a1a1a;
+}
+
+/* ==============================
+   GLOBAL
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Work Sans", sans-serif;
+  background-color: var(--ink);
+  color: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* halftone dot texture over the ink background */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==============================
+   HEADER
+================================ */
+
+header {
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--ink);
+  border-bottom: 6px solid var(--red);
+}
+
+/* diagonal poster stripe behind the title */
+header::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  background: repeating-linear-gradient(
+    -8deg,
+    var(--red) 0px,
+    var(--red) 3px,
+    transparent 3px,
+    transparent 42px
+  );
+  opacity: 0.5;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(to top, var(--ink), transparent);
+}
+
+header h1 {
+  position: relative;
+  z-index: 2;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.3rem, 6vw, 4.6rem);
+  letter-spacing: 1px;
+  line-height: 1.05;
+  color: var(--paper);
+  text-shadow: 4px 4px 0 var(--red-dark);
+  padding: 0 20px;
+  animation: stamp-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+}
+
+@keyframes stamp-in {
+  0% { transform: scale(1.6) rotate(-4deg); opacity: 0; }
+  100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+
+/* ==============================
+   MAIN
+================================ */
+
+main {
+  max-width: 1500px;
+  margin: auto;
+  padding: 70px 30px;
+}
+
+section h2 {
+  position: relative;
+  display: inline-block;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 2.1rem;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 10px 26px;
+  margin-bottom: 55px;
+  transform: rotate(-1.5deg);
+  box-shadow: 6px 6px 0 var(--red);
+}
+
+section {
+  text-align: center;
+}
+
+/* ==============================
+   ANIME GRID
+================================ */
+
+.anime-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 40px;
+  text-align: left;
+}
+
+.anime-list:hover .anime-item {
+  filter: grayscale(0.7);
+  opacity: 0.55;
+  transform: scale(0.98);
+}
+
+.anime-list .anime-item:hover {
+  filter: none;
+  opacity: 1;
+  transform: translateY(-6px);
+  z-index: 10;
+}
+
+/* ==============================
+   ANIME CARD (manga panel / poster page)
+================================ */
+
+.anime-item {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  border: 3px solid var(--line);
+  padding: 22px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.65);
+  transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+  cursor: default;
+}
+
+.anime-item:hover {
+  box-shadow: 14px 14px 0 var(--red-dark);
+}
+
+/* removes the old animated gradient border entirely */
+.anime-item::before {
+  content: none;
+}
+
+/* ==============================
+   IMAGE
+================================ */
+
+.anime-item img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  border: 3px solid var(--line);
+  filter: grayscale(0.15) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.anime-item:hover img {
+  filter: none;
+}
+
+/* ==============================
+   TEXT
+================================ */
+
+.anime-item h3 {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  margin: 20px 0 12px;
+  color: var(--ink);
+}
+
+.anime-item > p:first-of-type {
+  color: #35322a;
+  line-height: 1.75;
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+  max-width: 62ch;
+}
+
+.anime-item strong {
+  color: var(--red-dark);
+}
+
+/* rating shown as an ink stamp */
+.anime-item p:nth-of-type(2) {
+  display: inline-block;
+  background: var(--red);
+  color: var(--paper);
+  font-weight: 700;
+  padding: 6px 16px;
+  transform: rotate(-3deg);
+  margin-bottom: 20px;
+  border: 2px solid var(--line);
+}
+
+.anime-item p:nth-of-type(2) strong {
+  color: var(--paper);
+}
+
+/* remaining meta rows: genre / release date / studio / seasons / episodes / watch links */
+.anime-item p:nth-of-type(n + 3) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+.anime-item p:nth-of-type(n + 3) strong {
+  flex-shrink: 0;
+  min-width: 130px;
+}
+
+/* ==============================
+   CHARACTER TAGS
+================================ */
+
+.anime-item h4 {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+  color: var(--ink);
+  margin: 18px 0 10px;
+}
+
+.anime-item ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+.anime-item li {
+  background: transparent;
+  border: 2px solid var(--line);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.anime-item li::before {
+  content: none;
+}
+
+.anime-item li:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: none;
+}
+
+/* ==============================
+   TRAILER
+================================ */
+
+.trailer {
+  margin: 22px 0;
+}
+
+.trailer h4 {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 4px 12px;
+  margin-bottom: 12px;
+  transform: skewX(-6deg);
+}
+
+.trailer iframe {
+  width: 100%;
+  height: 230px;
+  border: 3px solid var(--line);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.trailer iframe:hover {
+  box-shadow: 8px 8px 0 var(--red-dark);
+}
+
+/* ==============================
+   LINKS / WATCH BUTTONS
+================================ */
+
+.anime-item a {
+  display: inline-block;
+  padding: 8px 16px;
+  color: var(--paper);
+  text-decoration: none;
+  background: var(--ink);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 2px solid var(--ink);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.anime-item a:hover {
+  background: var(--red);
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+
+.anime-item a:focus-visible,
+.trailer iframe:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ==============================
+   SCROLLBAR
+================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--red);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  header {
+    min-height: 200px;
+  }
+
+  main {
+    padding: 45px 18px;
+  }
+
+  .anime-list {
+    grid-template-columns: 1fr;
+  }
+
+  .anime-item {
+    padding: 16px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.6);
+  }
+
+  .anime-item img {
+    height: 340px;
+  }
+
+  .anime-list:hover .anime-item {
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .anime-item p:nth-of-type(n + 3) strong {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 450px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  section h2 {
+    font-size: 1.6rem;
+  }
+
+  .anime-item img {
+    height: 260px;
+  }
+
+  .anime-item h3 {
+    font-size: 1.3rem;
+  }
+}
