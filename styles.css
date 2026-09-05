@@ -26,6 +26,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -34,8 +35,6 @@ body {
   color: var(--paper);
   min-height: 100vh;
   overflow-x: hidden;
-
-  /* halftone dot texture over the ink background */
   background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.2px);
   background-size: 16px 16px;
 }
@@ -44,16 +43,158 @@ body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--paper);
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.btn-primary {
+  background: var(--red);
+  color: var(--paper);
+  border-color: var(--red);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--paper);
+}
+
+.btn-ghost:hover {
+  transform: translateY(-3px);
+  background: var(--paper);
+  color: var(--ink);
+}
+
 /* ==============================
-   HEADER
+   NAVBAR
+================================ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 3px solid var(--red);
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: padding 0.3s ease;
+}
+
+.navbar.scrolled .nav-inner {
+  padding: 10px 30px;
+}
+
+.logo {
+  font-family: "Anton", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  position: relative;
+  color: var(--paper);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 4px 0;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 3px;
+  background: var(--red);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--red);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav-toggle span {
+  width: 26px;
+  height: 3px;
+  background: var(--paper);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ==============================
+   HERO
 ================================ */
 
 header {
   position: relative;
-  min-height: 260px;
+  min-height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,9 +202,9 @@ header {
   overflow: hidden;
   background: var(--ink);
   border-bottom: 6px solid var(--red);
+  padding: 40px 20px;
 }
 
-/* diagonal poster stripe behind the title */
 header::before {
   content: "";
   position: absolute;
@@ -88,9 +229,20 @@ header::after {
   background: linear-gradient(to top, var(--ink), transparent);
 }
 
-header h1 {
+.hero-content {
   position: relative;
   z-index: 2;
+}
+
+.hero-eyebrow {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+}
+
+header h1 {
   font-family: "Anton", sans-serif;
   font-weight: 400;
   font-size: clamp(2.3rem, 6vw, 4.6rem);
@@ -105,6 +257,14 @@ header h1 {
 @keyframes stamp-in {
   0% { transform: scale(1.6) rotate(-4deg); opacity: 0; }
   100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+
+.hero-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* ==============================
@@ -126,13 +286,81 @@ section h2 {
   color: var(--ink);
   background: var(--paper);
   padding: 10px 26px;
-  margin-bottom: 55px;
+  margin-bottom: 40px;
   transform: rotate(-1.5deg);
   box-shadow: 6px 6px 0 var(--red);
 }
 
 section {
   text-align: center;
+  scroll-margin-top: 90px;
+}
+
+/* ==============================
+   SEARCH + FILTER CONTROLS
+================================ */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 45px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 18px;
+  border: 2px solid var(--paper);
+  background: transparent;
+  color: var(--paper);
+  font-family: "Work Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: rgba(242, 236, 220, 0.5);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pill {
+  padding: 8px 18px;
+  border: 2px solid var(--paper);
+  background: transparent;
+  color: var(--paper);
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+}
+
+.pill.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--paper);
+}
+
+.no-results {
+  margin-top: 30px;
+  color: var(--paper-dim);
+  font-style: italic;
 }
 
 /* ==============================
@@ -160,7 +388,7 @@ section {
 }
 
 /* ==============================
-   ANIME CARD (manga panel / poster page)
+   ANIME CARD
 ================================ */
 
 .anime-item {
@@ -172,13 +400,23 @@ section {
   box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.65);
   transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
   cursor: default;
+
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.anime-item.revealed {
+  animation: card-in 0.6s ease forwards;
+}
+
+@keyframes card-in {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .anime-item:hover {
   box-shadow: 14px 14px 0 var(--red-dark);
 }
 
-/* removes the old animated gradient border entirely */
 .anime-item::before {
   content: none;
 }
@@ -226,7 +464,6 @@ section {
   color: var(--red-dark);
 }
 
-/* rating shown as an ink stamp */
 .anime-item p:nth-of-type(2) {
   display: inline-block;
   background: var(--red);
@@ -242,7 +479,6 @@ section {
   color: var(--paper);
 }
 
-/* remaining meta rows: genre / release date / studio / seasons / episodes / watch links */
 .anime-item p:nth-of-type(n + 3) {
   display: flex;
   flex-wrap: wrap;
@@ -257,6 +493,10 @@ section {
 .anime-item p:nth-of-type(n + 3) strong {
   flex-shrink: 0;
   min-width: 130px;
+}
+
+.trailer-link a {
+  padding: 6px 14px !important;
 }
 
 /* ==============================
@@ -351,9 +591,171 @@ section {
 }
 
 .anime-item a:focus-visible,
-.trailer iframe:focus-visible {
+.trailer iframe:focus-visible,
+.search-input:focus-visible,
+.pill:focus-visible,
+.btn:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
+}
+
+/* ==============================
+   ABOUT
+================================ */
+
+.about-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--paper);
+  color: var(--ink);
+  border: 3px solid var(--line);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.65);
+  padding: 40px;
+
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.about-card.revealed {
+  animation: card-in 0.6s ease forwards;
+}
+
+.about-card h2 {
+  margin-bottom: 20px;
+}
+
+.about-card p {
+  line-height: 1.8;
+  color: #35322a;
+  margin-bottom: 30px;
+}
+
+.about-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: "Anton", sans-serif;
+  font-size: 2.2rem;
+  color: var(--red-dark);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #35322a;
+}
+
+/* ==============================
+   CONTACT
+================================ */
+
+.contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--paper);
+  color: var(--ink);
+  border: 3px solid var(--line);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.65);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.contact-form.revealed {
+  animation: card-in 0.6s ease forwards;
+}
+
+.contact-form label {
+  font-weight: 600;
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  background: transparent;
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--red);
+}
+
+.contact-form .btn {
+  margin-top: 20px;
+  align-self: flex-start;
+  border-color: var(--ink);
+}
+
+.form-note {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--red-dark);
+  font-style: italic;
+}
+
+/* ==============================
+   FOOTER
+================================ */
+
+.site-footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 3px solid var(--red);
+  color: var(--paper-dim);
+  font-size: 0.85rem;
+}
+
+/* ==============================
+   BACK TO TOP
+================================ */
+
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+  background: var(--red);
+  color: var(--paper);
+  border: 2px solid var(--line);
+  font-size: 1.3rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.25s ease;
+  z-index: 90;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--gold);
 }
 
 /* ==============================
@@ -380,9 +782,37 @@ section {
    RESPONSIVE
 ================================ */
 
+@media (max-width: 860px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--ink);
+    border-bottom: 3px solid var(--red);
+    padding: 20px 30px;
+    gap: 18px;
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
+
 @media (max-width: 768px) {
   header {
-    min-height: 200px;
+    min-height: 320px;
   }
 
   main {
@@ -410,6 +840,11 @@ section {
 
   .anime-item p:nth-of-type(n + 3) strong {
     min-width: 0;
+  }
+
+  .about-card,
+  .contact-form {
+    padding: 26px;
   }
 }
 

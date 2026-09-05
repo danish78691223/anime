@@ -4,20 +4,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anime Website</title>
+  <title>Anime Vault</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <header>
-    <h1>Welcome to the Anime Website</h1>
+
+  <!-- ============== NAVBAR ============== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#top" class="logo">Anime<span>Vault</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#top" class="nav-link active" data-link>Home</a></li>
+        <li><a href="#anime" class="nav-link" data-link>Anime</a></li>
+        <li><a href="#about" class="nav-link" data-link>About</a></li>
+        <li><a href="#contact" class="nav-link" data-link>Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============== HERO ============== -->
+  <header id="top">
+    <div class="hero-content">
+      <p class="hero-eyebrow">A hub for the anime you already can't stop thinking about</p>
+      <h1>Welcome to the Anime Website</h1>
+      <div class="hero-actions">
+        <a href="#anime" class="btn btn-primary">Browse anime</a>
+        <a href="#about" class="btn btn-ghost">What is this?</a>
+      </div>
+    </div>
   </header>
+
   <main>
-    <section>
+
+    <!-- ============== FEATURED ANIME ============== -->
+    <section id="anime">
       <h2>Featured Anime</h2>
-      <div class="anime-list">
-        <div class="anime-item">
-          <img src="assets/demon_slayer1.jpg" alt="Anime 1" />
+
+      <div class="controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search a title…" />
+        <div class="filter-pills" id="filterPills">
+          <button class="pill active" data-genre="all">All</button>
+          <button class="pill" data-genre="action">Action</button>
+          <button class="pill" data-genre="fantasy">Dark Fantasy</button>
+          <button class="pill" data-genre="superhero">Superhero</button>
+          <button class="pill" data-genre="adventure">Adventure</button>
+          <button class="pill" data-genre="supernatural">Supernatural</button>
+        </div>
+      </div>
+
+      <div class="anime-list" id="animeList">
+
+        <div class="anime-item" data-title="demon slayer kimetsu no yaiba" data-genre="action fantasy adventure">
+          <img src="assets/demon_slayer1.jpg" alt="Demon Slayer key art" />
           <h3>Demon Slayer : Kimetsu no Yaiba</h3>
           <p>
             Demon Slayer is a popular Japanese anime that follows Tanjiro
@@ -25,12 +69,7 @@
             After discovering that his sister Nezuko has been transformed into
             a demon, Tanjiro begins a dangerous journey to find a cure and
             avenge his family. He joins the Demon Slayer Corps and battles
-            powerful demons alongside his friends Zenitsu and Inosuke. The
-            anime is known for its stunning animation, emotional storytelling,
-            intense action scenes, and memorable characters. Demon Slayer
-            explores themes of family, courage, sacrifice, friendship, and
-            determination, making it one of the most loved anime series
-            worldwide.
+            powerful demons alongside his friends Zenitsu and Inosuke.
           </p>
           <p><strong>Rating:</strong> 8.5/10</p>
           <h4>Characters:</h4>
@@ -42,34 +81,30 @@
           </ul>
           <div class="trailer">
             <h4>Official Trailer</h4>
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/x7uLutVRBfI?si=1Ln4LJMINiHlKtvG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/x7uLutVRBfI?si=1Ln4LJMINiHlKtvG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
           </div>
           <p><strong>Genres:</strong> Action, Adventure, Dark Fantasy</p>
           <p><strong>Release Date:</strong> April 6, 2019</p>
           <p><strong>Studio:</strong> Ufotable</p>
-          <p><strong>Seasons:</strong> 4 </strong></p>
-          <p><strong>Episodes:</strong> 63 </strong></p>
+          <p><strong>Seasons:</strong> 4</p>
+          <p><strong>Episodes:</strong> 63</p>
           <p><strong>Click Here to Watch:</strong>
-            <a href="https://www.hotstar.com/in/shows/demon-slayer-kimetsu-no-yaiba/1971003555/demon-slayer-kimetsu-no-yaiba/1971041196/watch?search_query=Demon&ulp_id=1971003555"
-              target="_blank">JioHotstar</a>,
-            <a href="https://www.crunchyroll.com/demon-slayer" target="_blank">Crunchyroll</a>,
-            <a href="https://www.sonyliv.com/sports/demon-slayer" target="_blank">SonyLIV</a>
+            <a href="https://www.hotstar.com/in/shows/demon-slayer-kimetsu-no-yaiba/1971003555" target="_blank" rel="noopener">JioHotstar</a>,
+            <a href="https://www.crunchyroll.com/demon-slayer" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.sonyliv.com/sports/demon-slayer" target="_blank" rel="noopener">SonyLIV</a>
           </p>
         </div>
-        <div class="anime-item">
-          <img src="assets/my_hero_acdemia.jpg" alt="Anime 2" />
+
+        <div class="anime-item" data-title="my hero academia" data-genre="action superhero adventure">
+          <img src="assets/my_hero_acdemia.jpg" alt="My Hero Academia key art" />
           <h3>My Hero Academia</h3>
           <p>My Hero Academia is a popular Japanese anime set in a world where most people possess special abilities
             called Quirks. The story follows Izuku Midoriya, a young boy born without powers who dreams of becoming a
             great hero. His life changes when the legendary hero All Might chooses him to inherit his powerful ability.
             Izuku joins U.A. High School, where he trains alongside other aspiring heroes and faces dangerous villains.
-            The anime is known for its exciting action, inspiring characters, emotional moments, and powerful battles.
-            My Hero Academia explores themes of courage, friendship, hard work, responsibility, and the true meaning of
-            being a hero.
           </p>
           <p><strong>Rating:</strong> 8.2/10</p>
-          <p><strong>Characters:</strong></p>
+          <h4>Characters:</h4>
           <ul>
             <li>Izuku Midoriya (Deku)</li>
             <li>Katsuki Bakugo</li>
@@ -78,24 +113,308 @@
           </ul>
           <div class="trailer">
             <h4>Official Trailer</h4>
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/zz37nGym3OQ?si=MjUK-TBGrYHQH5qY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/zz37nGym3OQ?si=MjUK-TBGrYHQH5qY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
           </div>
           <p><strong>Genres:</strong> Action, Adventure, Superhero</p>
           <p><strong>Release Date:</strong> April 3, 2016</p>
           <p><strong>Studio:</strong> Bones</p>
-          <p><strong>Seasons:</strong> 8 </strong></p>
-          <p><strong>Episodes:</strong> 170 </strong></p>
+          <p><strong>Seasons:</strong> 8</p>
+          <p><strong>Episodes:</strong> 170</p>
           <p><strong>Click Here to Watch:</strong>
-            <a href="https://www.hotstar.com/in/clips/my-hero-academia-trailer/1271517940/watch?search_query=my+hero+academia"
-              target="_blank">JioHotstar</a>,
-            <a href="https://www.crunchyroll.com/my-hero-academia" target="_blank">Crunchyroll</a>,
-            <a href="https://www.sonyliv.com/sports/my-hero-academia" target="_blank">SonyLIV</a>
+            <a href="https://www.hotstar.com/in/shows/my-hero-academia" target="_blank" rel="noopener">JioHotstar</a>,
+            <a href="https://www.crunchyroll.com/my-hero-academia" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.sonyliv.com/sports/my-hero-academia" target="_blank" rel="noopener">SonyLIV</a>
           </p>
+        </div>
+
+        <div class="anime-item" data-title="attack on titan shingeki no kyojin" data-genre="action fantasy">
+          <img src="assets/attack_on_titan.jpg" alt="Attack on Titan key art" />
+          <h3>Attack on Titan</h3>
+          <p>
+            Attack on Titan follows Eren Yeager and his friends after their
+            hometown is destroyed by giant, man-eating Titans. Eren joins the
+            Survey Corps to fight back and uncover the truth about the walls
+            protecting humanity, the origin of the Titans, and the dark
+            history that ties them all together.
+          </p>
+          <p><strong>Rating:</strong> 9.0/10</p>
+          <h4>Characters:</h4>
+          <ul>
+            <li>Eren Yeager</li>
+            <li>Mikasa Ackerman</li>
+            <li>Armin Arlert</li>
+            <li>Levi Ackerman</li>
+          </ul>
+          <p class="trailer-link"><strong>Trailer:</strong> <a href="https://www.youtube.com/results?search_query=attack+on+titan+official+trailer" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          <p><strong>Genres:</strong> Action, Dark Fantasy, Drama</p>
+          <p><strong>Release Date:</strong> April 7, 2013</p>
+          <p><strong>Studio:</strong> Wit Studio / MAPPA</p>
+          <p><strong>Seasons:</strong> 4</p>
+          <p><strong>Episodes:</strong> 94</p>
+          <p><strong>Click Here to Watch:</strong>
+            <a href="https://www.crunchyroll.com/attack-on-titan" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.hotstar.com/in/shows/attack-on-titan" target="_blank" rel="noopener">JioHotstar</a>
+          </p>
+        </div>
+
+        <div class="anime-item" data-title="jujutsu kaisen" data-genre="action supernatural">
+          <img src="assets/jujutsu_kaisen.jpg" alt="Jujutsu Kaisen key art" />
+          <h3>Jujutsu Kaisen</h3>
+          <p>
+            Yuji Itadori, a high schooler with immense physical strength,
+            swallows a cursed talisman to save his friends and becomes host
+            to Sukuna, a powerful Curse. He joins Tokyo Jujutsu High to learn
+            to control this power and hunt down Sukuna's remaining fingers
+            before they can be used to bring ruin to the world.
+          </p>
+          <p><strong>Rating:</strong> 8.6/10</p>
+          <h4>Characters:</h4>
+          <ul>
+            <li>Yuji Itadori</li>
+            <li>Megumi Fushiguro</li>
+            <li>Nobara Kugisaki</li>
+            <li>Satoru Gojo</li>
+          </ul>
+          <p class="trailer-link"><strong>Trailer:</strong> <a href="https://www.youtube.com/results?search_query=jujutsu+kaisen+official+trailer" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          <p><strong>Genres:</strong> Action, Supernatural, Dark Fantasy</p>
+          <p><strong>Release Date:</strong> October 3, 2020</p>
+          <p><strong>Studio:</strong> MAPPA</p>
+          <p><strong>Seasons:</strong> 2</p>
+          <p><strong>Episodes:</strong> 47</p>
+          <p><strong>Click Here to Watch:</strong>
+            <a href="https://www.crunchyroll.com/jujutsu-kaisen" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.hotstar.com/in/shows/jujutsu-kaisen" target="_blank" rel="noopener">JioHotstar</a>
+          </p>
+        </div>
+
+        <div class="anime-item" data-title="one piece" data-genre="action adventure">
+          <img src="assets/one_piece.jpg" alt="One Piece key art" />
+          <h3>One Piece</h3>
+          <p>
+            Monkey D. Luffy sets sail with a ragtag crew of pirates in search
+            of the legendary treasure known as One Piece, aiming to become
+            the next Pirate King. Along the way the Straw Hat crew battles
+            rival pirates, the World Government, and the Marines, forging
+            unbreakable bonds of friendship across the Grand Line.
+          </p>
+          <p><strong>Rating:</strong> 8.7/10</p>
+          <h4>Characters:</h4>
+          <ul>
+            <li>Monkey D. Luffy</li>
+            <li>Roronoa Zoro</li>
+            <li>Nami</li>
+            <li>Sanji</li>
+          </ul>
+          <p class="trailer-link"><strong>Trailer:</strong> <a href="https://www.youtube.com/results?search_query=one+piece+official+trailer" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          <p><strong>Genres:</strong> Action, Adventure, Fantasy</p>
+          <p><strong>Release Date:</strong> October 20, 1999</p>
+          <p><strong>Studio:</strong> Toei Animation</p>
+          <p><strong>Seasons:</strong> Ongoing</p>
+          <p><strong>Episodes:</strong> 1100+</p>
+          <p><strong>Click Here to Watch:</strong>
+            <a href="https://www.crunchyroll.com/one-piece" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.hotstar.com/in/shows/one-piece" target="_blank" rel="noopener">JioHotstar</a>
+          </p>
+        </div>
+
+        <div class="anime-item" data-title="chainsaw man" data-genre="action supernatural">
+          <img src="assets/chainsaw_man.jpg" alt="Chainsaw Man key art" />
+          <h3>Chainsaw Man</h3>
+          <p>
+            Denji, a young devil hunter drowning in debt, merges with his
+            pet devil Pochita to become Chainsaw Man. Recruited by a public
+            safety agency, he's thrown into a brutal world of devils and
+            humans, chasing simple dreams while surviving fights far bigger
+            than himself.
+          </p>
+          <p><strong>Rating:</strong> 8.6/10</p>
+          <h4>Characters:</h4>
+          <ul>
+            <li>Denji</li>
+            <li>Power</li>
+            <li>Aki Hayakawa</li>
+            <li>Makima</li>
+          </ul>
+          <p class="trailer-link"><strong>Trailer:</strong> <a href="https://www.youtube.com/results?search_query=chainsaw+man+official+trailer" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          <p><strong>Genres:</strong> Action, Supernatural, Dark Fantasy</p>
+          <p><strong>Release Date:</strong> October 12, 2022</p>
+          <p><strong>Studio:</strong> MAPPA</p>
+          <p><strong>Seasons:</strong> 1</p>
+          <p><strong>Episodes:</strong> 12</p>
+          <p><strong>Click Here to Watch:</strong>
+            <a href="https://www.crunchyroll.com/chainsaw-man" target="_blank" rel="noopener">Crunchyroll</a>,
+            <a href="https://www.hotstar.com/in/shows/chainsaw-man" target="_blank" rel="noopener">JioHotstar</a>
+          </p>
+        </div>
+
+      </div>
+
+      <p class="no-results" id="noResults" hidden>Nothing matches that search — try a different title or genre.</p>
+    </section>
+
+    <!-- ============== ABOUT ============== -->
+    <section id="about" class="about">
+      <div class="about-card">
+        <h2>About This Page</h2>
+        <p>
+          Anime Vault is a small fan-made showcase collecting some of the
+          most talked-about anime out there — a quick way to check ratings,
+          casts, and where to stream each series before you commit to a
+          watch night.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Series featured</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Streaming platforms</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Rabbit hole waiting</span>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- ============== CONTACT ============== -->
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <form class="contact-form" id="contactForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note" id="formNote" hidden>Thanks — this demo form doesn't actually send anywhere yet, but it's ready to wire up.</p>
+      </form>
+    </section>
+
   </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="site-footer">
+    <p>Anime Vault — a fan project, not affiliated with any studio or streaming platform.</p>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script>
+    // ---- Navbar shrink on scroll ----
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ---- Mobile nav toggle ----
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // ---- Active nav link on scroll ----
+    const sections = ['top', 'anime', 'about', 'contact'].map(id => document.getElementById(id));
+    const navLinkEls = document.querySelectorAll('.nav-link');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinkEls.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+
+    sections.forEach(sec => sec && sectionObserver.observe(sec));
+
+    // ---- Scroll reveal for cards ----
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.anime-item, .about-card, .contact-form').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ---- Search + genre filter ----
+    const searchInput = document.getElementById('searchInput');
+    const pills = document.querySelectorAll('.pill');
+    const items = document.querySelectorAll('.anime-item');
+    const noResults = document.getElementById('noResults');
+    let activeGenre = 'all';
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const title = item.dataset.title;
+        const genres = item.dataset.genre;
+        const matchesSearch = title.includes(query);
+        const matchesGenre = activeGenre === 'all' || genres.includes(activeGenre);
+        const show = matchesSearch && matchesGenre;
+        item.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      noResults.hidden = visibleCount !== 0;
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeGenre = pill.dataset.genre;
+        applyFilters();
+      });
+    });
+
+    // ---- Contact form (demo only, no backend) ----
+    const contactForm = document.getElementById('contactForm');
+    const formNote = document.getElementById('formNote');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formNote.hidden = false;
+      contactForm.reset();
+    });
+  </script>
+
 </body>
 
 </html>
